@@ -1,0 +1,66 @@
+/* SavedItems.css */
+
+/* Styles for the saved items section */
+.h-100 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styles for the card */
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  /* Styles for the image */
+  .card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Styles for the product details */
+  .col-md-3 {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Styles for the price and delete icon */
+  .col-md-3.offset-lg-1,
+  .col-md-1 {
+    display: flex;
+    align-items: center;
+  }
+  
+  .text-danger {
+    color: #dc3545;
+    cursor: pointer;
+  }
+  
+  /* Additional styles for responsiveness */
+  @media (max-width: 767px) {
+    .col-md-3,
+    .col-md-3.offset-lg-1,
+    .col-md-1 {
+      text-align: center;
+    }
+  }
