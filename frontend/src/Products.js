@@ -1,8 +1,25 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import { useEffect, useState } from "react"
 const Products = () => {
+  const [products, setProducts] = useState(null)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await fetch('/api/products')
+      const json = await response.json()
+
+      if (response.ok) {
+        setProducts(json)
+      }
+    }
+
+    fetchProducts()
+  }, [])
+
     return (  
         
         <>
+       
 
 
 
@@ -15,32 +32,26 @@ const Products = () => {
     href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
   />
   <link rel="stylesheet" href="assets/Home/style.css" />
+ 
 <section id="product1" className="section-p1">
     <p>Collection Of Newest Devices</p>
+    
     <div className="pro-container">
-      <div className="pro">
-        <img src="assets/Home/macbook2.jpg" alt="" />
-        <div className="des">
-          <span>Apple</span>
-          <h5>Macbook pro M2</h5>
-          <div className="star">
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-          </div>
-          <h4>$1266</h4>
-        </div>
-        <a href="#">
-          <i className="fal fa-shopping-cart cart" />
-        </a>
-      </div>
-      <div className="pro">
+
+
+
+
+
+     
+    {products && products.map((product) => (
+      
+        <div className="pro">
+
+
   <img src="assets/Home/macbook2.jpg" alt="" />
   <div className="des">
     <span>Apple</span>
-    <h5>Macbook Air M2</h5>
+    <h5 key={product._id}>{product.name}</h5>
     <div className="star">
       <i className="fas fa-star" />
       <i className="fas fa-star" />
@@ -48,127 +59,28 @@ const Products = () => {
       <i className="fas fa-star" />
       <i className="fas fa-star" />
     </div>
-    <h4>$1166</h4>
-    <Link to="/ProductsDetails">
+    <h4 key={product._id}>{product.price}</h4>
+    <Link to={`/ProductsDetails/${product._id}`}>
    
     <button  className="see-details-button">See Details</button>
     </Link>
   </div>
-  <Link to="/ProductsDetails">
+  
+  {/* <Link to={`/ProductsDetails/${product.id}`}>
     <i className="fal fa-shopping-cart cart" />
-  </Link>
+  </Link> */}
 </div>
+  ))}
 
-      <div className="pro">
-        <img src="assets/Home/lenovo1.jpg" alt="" />
-        <div className="des">
-          <span>Lenovo</span>
-          <h5>lenovo legion 5 pro</h5>
-          <div className="star">
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-          </div>
-          <h4>$999</h4>
-        </div>
-        <a href="#">
-          <i className="fal fa-shopping-cart cart" />
-        </a>
-      </div>
-      <div className="pro">
-        <img src="asus1.jpg" alt="" />
-        <div className="des">
-          <span>Asus</span>
-          <h5>Asus Tuf gaming </h5>
-          <div className="star">
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-          </div>
-          <h4>$1580</h4>
-        </div>
-        <a href="#">
-          <i className="fal fa-shopping-cart cart" />
-        </a>
-      </div>
-      <div className="pro">
-        <img src="assets/Home/lenovo1.jpg" alt="" />
-        <div className="des">
-          <span>Lenovo</span>
-          <h5>lenovo legion 7 pro</h5>
-          <div className="star">
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-          </div>
-          <h4>$1366</h4>
-        </div>
-        <a href="#">
-          <i className="fal fa-shopping-cart cart" />
-        </a>
-      </div>
-      <div className="pro">
-        <img src="assets/Home/asus1.jpg" alt="" />
-        <div className="des">
-          <span>Asus</span>
-          <h5>Asus Tuf rtx3060</h5>
-          <div className="star">
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-          </div>
-          <h4>$2666</h4>
-        </div>
-        <a href="#">
-          <i className="fal fa-shopping-cart cart" />
-        </a>
-      </div>
-      <div className="pro">
-        <img src="assets/Home/macbook2.jpg" alt="" />
-        <div className="des">
-          <span>Apple</span>
-          <h5>Macbook Air M2</h5>
-          <div className="star">
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-          </div>
-          <h4>$1266</h4>
-        </div>
-        <a href="#">
-          <i className="fal fa-shopping-cart cart" />
-        </a>
-      </div>
-      <div className="pro">
-        <img src="assets/Home/macbook2.jpg" alt="" />
-        <div className="des">
-          <span>Apple</span>
-          <h5>Macbook Air M2</h5>
-          <div className="star">
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-            <i className="fas fa-star" />
-          </div>
-          <h4>$1266</h4>
-        </div>
-        <a href="#">
-          <i className="fal fa-shopping-cart cart" />
-        </a>
-      </div>
+   
+    
+ 
+  
+      
+   
     </div>
   </section>
+
   </>
 
     );

@@ -1,4 +1,62 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+
+
+// Import local styles
+// import './assets/ProductsDetails/style.css';
+
+// Import external library styles
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'https://fonts.googleapis.com/css2?family=Poppins&display=swap';
+
+
 const ProductsDetails = () => {
+  // const { productId } = useParams();
+  // const [product, setProduct] = useState(null)
+
+  // useEffect(() => {
+  //   const fetchProduct = async () => {
+  //     const response = await fetch(`/api/products/${productId}`)
+  //     const json = await response.json()
+
+  //     if (response.ok) {
+  //       setProduct(json)
+  //     }
+  //   }
+
+  //   fetchProduct()
+  // }, [])
+  const { productId } = useParams();
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`/api/products/${productId}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch product');
+        }
+
+        const productData = await response.json();
+        setProduct(productData);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchProduct();
+  }, []);
+
+  if (!product) {
+    // Loading state or error handling can be added here
+    return <div>Loading...</div>;
+  }
+
+
+
+
     return (  
         <>
   <meta charSet="UTF-8" />
@@ -35,14 +93,14 @@ const ProductsDetails = () => {
         </div>
       </div>
       <div className="info">
-        <h1>Women Garments</h1>
+        <h1>{product.name}</h1>
         <div className="rating">
           <h4 className="review">3 Reviews</h4>
           <a href="" className="review">
             add Your Review
           </a>
         </div>
-        <h1 className="price">$57.00</h1>
+        <h1 className="price">{product.price}</h1>
         <h4 className="title">Color</h4>
         <div className="colors">
           <span className="color green" />

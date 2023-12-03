@@ -14,6 +14,7 @@ import Payment from './Payment';
 import SavedItems from './SavedItems';
 import Checkout from './Checkout';
 import Cart from './Cart';
+import AddProduct from './AddProduct';
 
 
 
@@ -38,7 +39,7 @@ function App() {
         <Route path='/Products'>
            <Products/> 
            </Route>
-        <Route path='/ProductsDetails'>
+        <Route path='/ProductsDetails/:productId'>
            <ProductsDetails/> 
         </Route>
         <Route path='/Payment'>
@@ -53,9 +54,17 @@ function App() {
         <Route path='/Cart'>
            <Cart/> 
         </Route>
+        <Route path='/addProduct'>
+           <AddProduct />
+        </Route>
+        
       </Switch>
       <Footer />
     </Router>
+
+
+
+  
 
 
   
