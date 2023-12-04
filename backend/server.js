@@ -1,20 +1,19 @@
-require('dotenv').config()
-
-const express = require('express')
-const productRoutes = require('./routes/products')
+const express = require('express');
+const productRoutes = require('./routes/products');
+const cartRoutes = require('./routes/cart');
 const mongoose = require('mongoose');
 const path = require('path');
+require('dotenv').config();
 
-// express app
-const app = express()
+const app = express();
 
-// middleware
-app.use(express.json())
+app.use(express.json());
 
 app.use((req, res, next) => {
-  console.log(req.path, req.method)
-  next()
-})
+  console.log(req.path, req.method);
+  next();
+});
+
 // Middleware to set MIME type for CSS files
 app.use('/assets/ProductsDetails', (req, res, next) => {
   if (path.extname(req.path) === '.css') {
@@ -22,23 +21,22 @@ app.use('/assets/ProductsDetails', (req, res, next) => {
   }
   next();
 });
-// app.use('assets/ProductsDetails', express.static(path.join(__dirname,'assets/ProductsDetails')));
 
-// app.use(express.static(path.join(__dirname, '../public')));
-app.use('/assets/ProductsDetails', express.static(path.join(__dirname, 'assets/ProductsDetails')));
+// Serve static files from the 'frontend/public' directory
+app.use('/assets/ProductsDetails', express.static(path.join(__dirname, '../frontend/public')));
+app.use('/api/cart', cartRoutes);
 
-// routes
 app.use('/api/products', productRoutes);
 
-// connect to db
-mongoose.connect(process.env.MONGO_URl)
+
+mongoose
+  .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log('connected to database')
-    // listen to port
+    console.log('Connected to the database');
     app.listen(process.env.PORT, () => {
-      console.log('listening for requests on port', process.env.PORT)
-    })
+      console.log('Listening for requests on port', process.env.PORT);
+    });
   })
   .catch((err) => {
-    console.log(err)
-  })
+    console.error('Error connecting to the database:', err);
+  });

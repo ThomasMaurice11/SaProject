@@ -56,11 +56,7 @@ const Payment = () => {
 								</div>
 							</div>
 							<div className="row">
-								<div className="col-md-12 red-bg">
-									<p className="bill-date" id="total-label">Total Price</p>
-									<h2 className="bill-head" id="total">$ 523.65</h2>
-									<small className="bill-date" id="total-label">Price includes all taxes</small>
-								</div>
+								
 							</div>
 						</div>
 					</div>

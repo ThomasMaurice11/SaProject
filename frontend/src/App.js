@@ -42,6 +42,7 @@ function App() {
         <Route path='/ProductsDetails/:productId'>
            <ProductsDetails/> 
         </Route>
+    
         <Route path='/Payment'>
            <Payment/> 
         </Route>

@@ -1,8 +1,44 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom/cjs/react-router-dom";
+
 const Cart = () => {
+
+  // get products from cart
+  const { userId } = useParams();
+  const [products, setProducts] = useState(null);
+
+ 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`/api/cart`);
+
+        if (response.ok) {
+          const productData = await response.json();
+          setProducts(productData);
+          console.log(productData);
+        } else {
+          console.error('Failed to fetch product:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    };
+
+    fetchProduct();
+  }, [userId]);
+
+  if (!products) {
+    return <div>Loading...</div>;
+  }
+
+
     return ( 
     
         <>
        <>
+       
   <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -15,6 +51,7 @@ const Cart = () => {
 </>
 
       <link rel='stylesheet' href='assets/Cart/style.css'></link>
+      <div className="allCart">
 <div className="card">
   <div className="row">
     <div className="col-md-8 cart">
@@ -25,40 +62,18 @@ const Cart = () => {
               <b>Shopping Cart</b>
             </h4>
           </div>
-          <div className="col align-self-center text-right text-muted">
-            3 items
-          </div>
+          
         </div>
       </div>
-      <div className="row border-top border-bottom">
-        <div className="row main align-items-center">
-          <div className="col-2">
-            <img className="img-fluid" src="https://i.imgur.com/1GrakTl.jpg" />
-          </div>
-          <div className="col">
-            <div className="row text-muted">Shirt</div>
-            <div className="row">Cotton T-shirt</div>
-          </div>
-          <div className="col">
-            <a href="#">-</a>
-            <a href="#" className="border">
-              1
-            </a>
-            <a href="#">+</a>
-          </div>
-          <div className="col">
-            € 44.00 <span className="close">✕</span>
-          </div>
-        </div>
-      </div>
+      {products && products.map((product) => (
       <div className="row">
         <div className="row main align-items-center">
           <div className="col-2">
             <img className="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg" />
           </div>
           <div className="col">
-            <div className="row text-muted">Shirt</div>
-            <div className="row">Cotton T-shirt</div>
+            <div className="row text-muted">{product.name}</div>
+            <div className="row">{product.brand}</div>
           </div>
           <div className="col">
             <a href="#">-</a>
@@ -68,67 +83,27 @@ const Cart = () => {
             <a href="#">+</a>
           </div>
           <div className="col">
-            € 44.00 <span className="close">✕</span>
+            {product.price}$ <span className="close">✕</span>
           </div>
         </div>
       </div>
-      <div className="row border-top border-bottom">
-        <div className="row main align-items-center">
-          <div className="col-2">
-            <img className="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg" />
-          </div>
-          <div className="col">
-            <div className="row text-muted">Shirt</div>
-            <div className="row">Cotton T-shirt</div>
-          </div>
-          <div className="col">
-            <a href="#">-</a>
-            <a href="#" className="border">
-              1
-            </a>
-            <a href="#">+</a>
-          </div>
-          <div className="col">
-            € 44.00 <span className="close">✕</span>
-          </div>
-        </div>
-      </div>
+      ))}
+  
       <div className="back-to-shop">
         <a href="#">←</a>
         <span className="text-muted">Back to shop</span>
       </div>
     </div>
     <div className="col-md-4 summary">
-      <div>
-        <h5>
-          <b>Summary</b>
-        </h5>
-      </div>
-      <hr />
-      <div className="row">
-        <div className="col" style={{ paddingLeft: 0 }}>
-          ITEMS 3
-        </div>
-        <div className="col text-right">€ 132.00</div>
-      </div>
-      <form>
-        <p>SHIPPING</p>
-        <select>
-          <option className="text-muted">Standard-Delivery- €5.00</option>
-        </select>
-        <p>GIVE CODE</p>
-        <input id="code" placeholder="Enter your code" />
-      </form>
-      <div
-        className="row"
-        style={{ borderTop: "1px solid rgba(0,0,0,.1)", padding: "2vh 0" }}
-      >
-        <div className="col">TOTAL PRICE</div>
-        <div className="col text-right">€ 137.00</div>
-      </div>
+      
+      
+      <Link to ='/Payment'>
+      <button className="btn">Pay By Card</button>
+      </Link>
       <button className="btn">CHECKOUT</button>
     </div>
   </div>
+</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />

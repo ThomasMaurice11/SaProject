@@ -2,7 +2,7 @@ body{
     background: #ddd;
     min-height: 100vh;
     vertical-align: middle;
-    display: flex;
+   
     font-family: sans-serif;
     font-size: 0.8rem;
     font-weight: bold;
@@ -51,12 +51,15 @@ body{
 }
 .summary .col-2{
     padding: 0;
+    color: #000;
 }
 .summary .col-10
 {
     padding: 0;
+    color: #000;
 }.row{
     margin: 0;
+    color: #000;
 }
 .title b{
     font-size: 1.5rem;
