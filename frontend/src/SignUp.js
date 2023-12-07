@@ -1,4 +1,18 @@
+import { useSignup } from "./hooks/useSignup"
+import React, { useEffect, useState } from 'react';
 const SignUp = () => {
+
+  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
+  const {signup, error, isLoading} = useSignup()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    await signup(email, password)
+  }
+
     return ( 
         <>
         <meta charSet="UTF-8" />
@@ -19,7 +33,7 @@ const SignUp = () => {
         <div className="signup-content">
           <div className="signup-form">
             <h2 className="form-title">Sign up</h2>
-            <form method="POST" className="register-form" id="register-form">
+            <form method="POST" className="register-form" onSubmit={handleSubmit} id="register-form">
               <div className="form-group">
                 <label htmlFor="name">
                   <i className="zmdi zmdi-account material-icons-name" />
@@ -28,6 +42,8 @@ const SignUp = () => {
                   type="text"
                   name="name"
                   id="name"
+                  onChange={(e) => setName(e.target.value)} 
+                  value={name}
                   placeholder="Your Name"
                 />
               </div>
@@ -39,6 +55,8 @@ const SignUp = () => {
                   type="email"
                   name="email"
                   id="email"
+                  onChange={(e) => setEmail(e.target.value)} 
+                  value={email}
                   placeholder="Your Email"
                 />
               </div>
@@ -50,37 +68,15 @@ const SignUp = () => {
                   type="password"
                   name="pass"
                   id="pass"
+                  onChange={(e) => setPassword(e.target.value)} 
+                  value={password}
                   placeholder="Password"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="re-pass">
-                  <i className="zmdi zmdi-lock-outline" />
-                </label>
-                <input
-                  type="password"
-                  name="re_pass"
-                  id="re_pass"
-                  placeholder="Repeat your password"
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="checkbox"
-                  name="agree-term"
-                  id="agree-term"
-                  className="agree-term"
-                />
-                <label htmlFor="agree-term" className="label-agree-term">
-                  <span>
-                    <span />
-                  </span>
-                  I agree all statements in{" "}
-                  <a href="#" className="term-service">
-                    Terms of service
-                  </a>
-                </label>
-              </div>
+              {/* <div className="form-group form-button">
+              <button name="signup"  id="signup"  disabled={isLoading}>Sign up</button>
+      {error && <div className="error">{error}</div>}
+      </div> */}
               <div className="form-group form-button">
                 <input
                   type="submit"
@@ -89,7 +85,9 @@ const SignUp = () => {
                   className="form-submit"
                   defaultValue="Register"
                 />
+              
               </div>
+              {error && <div className="error">{error}</div>}
             </form>
           </div>
           <div className="signup-image">

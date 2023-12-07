@@ -1,6 +1,7 @@
 const express = require('express');
 const productRoutes = require('./routes/products');
 const cartRoutes = require('./routes/cart');
+const userRoutes = require('./routes/user');
 const mongoose = require('mongoose');
 const path = require('path');
 require('dotenv').config();
@@ -25,6 +26,7 @@ app.use('/assets/ProductsDetails', (req, res, next) => {
 // Serve static files from the 'frontend/public' directory
 app.use('/assets/ProductsDetails', express.static(path.join(__dirname, '../frontend/public')));
 app.use('/api/cart', cartRoutes);
+app.use('/api/user', userRoutes)
 
 app.use('/api/products', productRoutes);
 

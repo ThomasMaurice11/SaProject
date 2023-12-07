@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams,useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import { require } from "react-router-dom/cjs/react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext"
+
+
 
 
 
@@ -35,12 +39,20 @@ const ProductsDetails = () => {
   // get products
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+   const {user} = useAuthContext();
   const history = useHistory();
 
   useEffect(() => {
     const fetchProduct = async () => {
+      if (!user) {
+        return
+      }
       try {
-        const response = await fetch(`/api/products/${productId}`);
+        const response = await fetch(`/api/products/${productId}`, {
+           headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+        });
         
         if (!response.ok) {
           throw new Error('Failed to fetch product');
@@ -54,7 +66,7 @@ const ProductsDetails = () => {
     };
 
     fetchProduct();
-  }, []);
+  }, [user]);
 
   if (!product) {
     // Loading state or error handling can be added here
@@ -70,6 +82,10 @@ const ProductsDetails = () => {
  
   const addToCart = async (e) => {
     e.preventDefault()
+    if (!user) {
+      // setError('You must be logged in');
+      return
+    }
 
     const cart={user_id,product_id,name,price,description,brand,image}
     
@@ -77,7 +93,8 @@ const ProductsDetails = () => {
       method: 'POST',
       body: JSON.stringify(cart),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        headers: {'Authorization': `Bearer ${user.token}`}
       }
     })
     const json = await response.json()
@@ -94,6 +111,7 @@ const ProductsDetails = () => {
     }
 
   }
+
 
 
 

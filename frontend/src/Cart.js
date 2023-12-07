@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext"
 
 const Cart = () => {
 
   // get products from cart
   const { userId } = useParams();
   const [products, setProducts] = useState(null);
-
+  const {user} = useAuthContext()
  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/api/cart`);
+        const response = await fetch(`/api/cart`, {
+          headers: {'Authorization': `Bearer ${user.token}`},
+        });
 
         if (response.ok) {
           const productData = await response.json();
@@ -25,13 +28,17 @@ const Cart = () => {
         console.error('Error:', error.message);
       }
     };
+    if (user) {
+      fetchProduct()
+    }
 
-    fetchProduct();
-  }, [userId]);
+  
+  },[user]);
 
   if (!products) {
     return <div>Loading...</div>;
   }
+
 
 
     return ( 

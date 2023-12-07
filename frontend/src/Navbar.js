@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import { useLogout } from './hooks/useLogout'
 const Navbar = () => {
+  const { logout } = useLogout()
+
+  const handleClick = () => {
+    logout()
+  }
     return ( 
         <>
           <meta charSet="UTF-8" />
@@ -28,14 +34,17 @@ const Navbar = () => {
         <li>
           <Link to="/Products">products</Link>
         </li>
-        <li>
-          <a href="about.html">About</a>
-        </li>
+       
         <li>
           <Link to="/SavedItems">Saved Items</Link>
         </li>
         <li>
           <Link to="/Cart">Cart</Link>
+        </li>
+        <li>
+        
+          <button id="logout-btn" onClick={handleClick}>Log out</button>
+          
         </li>
       </ul>
     </div>

@@ -11,6 +11,14 @@ const {
 } = require('../controllers/cartController')
 
 
+// const requireAuth = require('../middleware/requireAuth')
+
+
+
+// // require auth for all workout routes
+// router.use(requireAuth)
+
+
 
 
 
