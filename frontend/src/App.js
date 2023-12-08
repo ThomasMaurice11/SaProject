@@ -29,10 +29,10 @@ function App() {
       <Navbar />
       <Switch>
       <Route exact path='/'>
-          <Home/>
+          <Login/>
         </Route>
-        <Route path='/Login'>
-           <Login />
+        <Route path='/home'>
+           <Home />
         </Route>
         <Route path='/SignUp'>
            <SignUp/> 

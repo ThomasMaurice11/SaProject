@@ -123,6 +123,42 @@ const ProductsDetails = () => {
 
 
 
+  const addToSaved = async (e) => {
+    e.preventDefault()
+    if (!user) {
+      // setError('You must be logged in');
+      return
+    }
+
+    const saved={userId,product_id,name,price,description,brand,image}
+    
+    const response = await fetch('/api/saved', {
+      method: 'POST',
+      body: JSON.stringify(saved),
+      headers: {
+        'Content-Type': 'application/json',
+        headers: {'Authorization': `Bearer ${user.token}`}
+      }
+    })
+    const json = await response.json()
+
+    // if (!response.ok) {
+    //   setError(json.error)
+    // }
+    if (response.ok) {
+      // setError(null)
+    
+      history.push(`/SavedItems`);
+
+
+      console.log('new product added:', json);
+      // history.push(`/Cart`);
+    }
+
+  }
+
+
+
 
     return (  
         <>
@@ -188,11 +224,11 @@ const ProductsDetails = () => {
     add to Cart
   </button>
 </Link>
-{/* <Link to={`/Cart/${userId}`}>
-  <button onClick={addToCart} className="addtocart">
+<Link to={`/Cart/${userId}`}>
+  <button onClick={addToSaved} className="addtocart">
     Save Item
   </button>
-</Link> */}
+</Link>
         {/* <a href="" className="cart">
           Add to cart
         </a> */}

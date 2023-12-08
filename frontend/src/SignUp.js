@@ -1,18 +1,48 @@
 import { useSignup } from "./hooks/useSignup"
 import React, { useEffect, useState } from 'react';
+import { useParams,useHistory } from 'react-router-dom';
 const SignUp = () => {
+  const [email, setEmail] = useState('');
+  const [fname, setFname] = useState('');
+  const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
+  const [mobile, setMobile] = useState('');
 
-  const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
-  const {signup, error, isLoading} = useSignup()
+  const { signup, error } = useSignup();
+  const history = useHistory(); // Add this line to use the useHistory hook
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    const data = { fname, mobile, address };
 
-    await signup(email, password)
-  }
+    const response = await fetch('/api/user', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
+    const json = await response.json();
+
+    if (!response.ok) {
+      // Handle error
+    }
+
+    if (response.ok) {
+      setFname('');
+      setMobile('');
+      setAddress('');
+
+      console.log('new product added:', json);
+
+      // After successful signup, navigate to /Login
+      
+    }
+
+    await signup(email, password);
+    history.push('/');
+  };
     return ( 
         <>
         <meta charSet="UTF-8" />
@@ -42,9 +72,35 @@ const SignUp = () => {
                   type="text"
                   name="name"
                   id="name"
-                  onChange={(e) => setName(e.target.value)} 
-                  value={name}
+                  onChange={(e) => setFname(e.target.value)} 
+                  value={fname}
                   placeholder="Your Name"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">
+                  <i className="zmdi zmdi-email" />
+                </label>
+                <input
+                  type="mobile"
+                  name="mobile"
+                  id="email"
+                  onChange={(e) => setMobile(e.target.value)} 
+                  value={mobile}
+                  placeholder="Your Mobile"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">
+                  <i className="zmdi zmdi-email" />
+                </label>
+                <input
+                  type="address"
+                  name="address"
+                  id="email"
+                  onChange={(e) => setAddress(e.target.value)} 
+                  value={address}
+                  placeholder="Your address"
                 />
               </div>
               <div className="form-group">

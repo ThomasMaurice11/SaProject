@@ -1,15 +1,19 @@
 import { useState } from "react"
 import { useLogin } from "./hooks/useLogin"
+import { Link } from "react-router-dom/cjs/react-router-dom";
+import { useParams,useHistory } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const {login, error, isLoading} = useLogin()
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    await login(email, password)
+    await login(email, password);
+    history.push('/Home');
   }
     return ( 
       <>
@@ -32,9 +36,9 @@ const Login = () => {
             <figure>
               <img src="assets/reg/images/signin-image.jpg" alt="sing up image" />
             </figure>
-            <a href="#" className="signup-image-link">
+            <Link to="/SignUp" className="signup-image-link">
               Create an account
-            </a>
+            </Link>
           </div>
           <div className="signin-form">
             <h2 className="form-title">Login</h2>

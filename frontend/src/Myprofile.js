@@ -1,19 +1,20 @@
 import React from 'react';
-
+import { useState } from 'react'
 const Myprofile = () => {
   const [fname,setFname]=useState('');
   const [sname,setSname]=useState('');
   const [mobile,setMobile]=useState('');
   const [address,setAddress]=useState('');
+  const [error,setError]=useState('');
  
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const product={name,price,brand,description,image}
+    const data={fname,sname,mobile,address}
     
-    const response = await fetch('/api/products', {
+    const response = await fetch('/api/user', {
       method: 'POST',
-      body: JSON.stringify(product),
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -24,12 +25,12 @@ const Myprofile = () => {
       setError(json.error)
     }
     if (response.ok) {
-      setError(null)
-      setName('')
-      setPrice('')
-      setBrand('')
-      setimage('')
-      setDescription('')
+     
+      setFname('')
+      setSname('')
+      setMobile('')
+      setAddress('')
+      
 
       console.log('new product added:', json)
     }
@@ -64,13 +65,18 @@ const Myprofile = () => {
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <h4 className="text-right">Profile Settings</h4>
               </div>
+              <form  onSubmit={handleSubmit}>
               <div className="row mt-2">
+                
                 <div className="col-md-6">
+               
                   <label className="labels">Name</label>
                   <input
                     type="text"
                     className="form-control"
                     placeholder="first name"
+                    onChange={(e) => setFname(e.target.value)} 
+                    value={fname}
                     defaultValue=""
                   />
                 </div>
@@ -79,6 +85,8 @@ const Myprofile = () => {
                   <input
                     type="text"
                     className="form-control"
+                    onChange={(e) => setSname(e.target.value)} 
+                    value={sname}
                     defaultValue=""
                     placeholder="surname"
                   />
@@ -90,6 +98,8 @@ const Myprofile = () => {
                   <input
                     type="text"
                     className="form-control"
+                    onChange={(e) => setMobile(e.target.value)} 
+                    value={mobile}
                     placeholder="enter phone number"
                     defaultValue=""
                   />
@@ -100,20 +110,33 @@ const Myprofile = () => {
                     type="text"
                     className="form-control"
                     placeholder="enter address line 1"
+                    onChange={(e) => setAddress(e.target.value)} 
+                    value={address}
                     defaultValue=""
                   />
                 </div>
               </div>
 
               <div className="mt-5 text-center">
-                <button className="btn btn-primary profile-button" type="button">
+                <button className="btn btn-primary profile-button" type="submit">
                   Save Profile
                 </button>
               </div>
+              </form>
+              
+              
             </div>
+            
+            
+            
           </div>
+          
+         
         </div>
+        
+        
       </div>
+      
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.min.js"></script>
     </>

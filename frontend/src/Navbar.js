@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import { useLogout } from './hooks/useLogout'
 import { useUser } from './context/userContext';
+import { useParams,useHistory } from 'react-router-dom';
 import React from "react";
 const Navbar = () => {
+  const history = useHistory();
   const userId = useUser();
   const { logout } = useLogout() ;
 
 
   const handleClick = () => {
-    logout()
+    logout();
+    history.push('/');
   }
     return ( 
         <>
@@ -30,7 +33,7 @@ const Navbar = () => {
       <ul id="navbar">
         <li><a href="">{userId}</a></li>
         <li>
-          <Link to="/">
+          <Link to="/Home">
             Home
           </Link>
         </li>
