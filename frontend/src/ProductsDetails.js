@@ -3,6 +3,10 @@ import { useParams,useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import { require } from "react-router-dom/cjs/react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext"
+import { useUser } from './context/userContext';
+
+
+
 
 
 
@@ -18,6 +22,8 @@ import { useAuthContext } from "./hooks/useAuthContext"
 
 
 const ProductsDetails = () => {
+  const userId = useUser();
+    
   // const { productId } = useParams();
   // const [product, setProduct] = useState(null)
 
@@ -76,7 +82,8 @@ const ProductsDetails = () => {
 
 
  
-  const user_id=1 ;
+
+
   const { _id,name,price,description,brand,image } = product;
   const product_id = _id.toString();
  
@@ -87,7 +94,7 @@ const ProductsDetails = () => {
       return
     }
 
-    const cart={user_id,product_id,name,price,description,brand,image}
+    const cart={userId,product_id,name,price,description,brand,image}
     
     const response = await fetch('/api/cart', {
       method: 'POST',
@@ -104,10 +111,12 @@ const ProductsDetails = () => {
     // }
     if (response.ok) {
       // setError(null)
+    
+      history.push(`/Cart`);
 
 
       console.log('new product added:', json);
-      history.push(`/Cart`);
+      // history.push(`/Cart`);
     }
 
   }
@@ -174,11 +183,16 @@ const ProductsDetails = () => {
         </div> */}
         <h4 className="title">Qty</h4>
         <input type="text" defaultValue={1} className="qty" />
-        {/* <Link to={`/Cart/${user_id}`}> */}
-  <button onClick={addToCart} className="cart">
+        <Link to={`/Cart/${userId}`}>
+  <button onClick={addToCart} className="addtocart">
     add to Cart
   </button>
-{/* </Link> */}
+</Link>
+{/* <Link to={`/Cart/${userId}`}>
+  <button onClick={addToCart} className="addtocart">
+    Save Item
+  </button>
+</Link> */}
         {/* <a href="" className="cart">
           Add to cart
         </a> */}

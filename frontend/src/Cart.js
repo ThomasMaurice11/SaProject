@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext"
+import { useUser } from './context/userContext';
 
 const Cart = () => {
+  // const { userId } = useParams();
+  const userId=useUser();
+
+  
 
   // get products from cart
-  const { userId } = useParams();
+  
   const [products, setProducts] = useState(null);
   const {user} = useAuthContext()
  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/api/cart`, {
+        const response = await fetch(`/api/cart/${userId}`, {
           headers: {'Authorization': `Bearer ${user.token}`},
         });
 
@@ -33,7 +38,7 @@ const Cart = () => {
     }
 
   
-  },[user]);
+  },[userId]);
 
   if (!products) {
     return <div>Loading...</div>;
@@ -57,7 +62,7 @@ const Cart = () => {
   />
 </>
 
-      <link rel='stylesheet' href='assets/Cart/style.css'></link>
+      <link rel='stylesheet' href='assets/Cart/style.cs'></link>
       <div className="allCart">
 <div className="card">
   <div className="row">
@@ -105,9 +110,9 @@ const Cart = () => {
       
       
       <Link to ='/Payment'>
-      <button className="btn">Pay By Card</button>
+      <button className="btn-pay">Pay By Card</button>
       </Link>
-      <button className="btn">CHECKOUT</button>
+      <button className="btn-pay">CHECKOUT</button>
     </div>
   </div>
 </div>

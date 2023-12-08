@@ -15,12 +15,16 @@ import SavedItems from './SavedItems';
 import Checkout from './Checkout';
 import Cart from './Cart';
 import AddProduct from './AddProduct';
+// import MyId from './MyId';
+
+import { UserContextProvider } from './context/userContext';
 
 
 
 
 function App() {
   return (
+   <UserContextProvider>
     <Router>
       <Navbar />
       <Switch>
@@ -52,16 +56,18 @@ function App() {
         <Route path='/Checkout'>
            <Checkout/> 
         </Route>
-        <Route path='/Cart'>
+        <Route path='/Cart/:userId'>
            <Cart/> 
         </Route>
         <Route path='/addProduct'>
            <AddProduct />
         </Route>
         
+        
       </Switch>
       <Footer />
     </Router>
+    </UserContextProvider>
 
 
 

@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import { useLogout } from './hooks/useLogout'
+import { useUser } from './context/userContext';
+import React from "react";
 const Navbar = () => {
-  const { logout } = useLogout()
+  const userId = useUser();
+  const { logout } = useLogout() ;
+
 
   const handleClick = () => {
     logout()
@@ -22,14 +26,16 @@ const Navbar = () => {
       <img src="assets/home/logo1.png" className="logo1" alt="" />
     </a>
     <div>
+      
       <ul id="navbar">
+        <li><a href="">{userId}</a></li>
         <li>
           <Link to="/">
             Home
           </Link>
         </li>
         <li>
-          <Link to='/Myprofile'>My profile</Link>
+          <Link to='/Myprofile'>My profile </Link>
         </li>
         <li>
           <Link to="/Products">products</Link>
@@ -39,7 +45,8 @@ const Navbar = () => {
           <Link to="/SavedItems">Saved Items</Link>
         </li>
         <li>
-          <Link to="/Cart">Cart</Link>
+        <Link to={`/cart/${userId}`}>Cart</Link>
+
         </li>
         <li>
         

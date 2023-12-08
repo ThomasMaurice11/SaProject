@@ -1,6 +1,41 @@
 import React from 'react';
 
 const Myprofile = () => {
+  const [fname,setFname]=useState('');
+  const [sname,setSname]=useState('');
+  const [mobile,setMobile]=useState('');
+  const [address,setAddress]=useState('');
+ 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const product={name,price,brand,description,image}
+    
+    const response = await fetch('/api/products', {
+      method: 'POST',
+      body: JSON.stringify(product),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const json = await response.json()
+
+    if (!response.ok) {
+      setError(json.error)
+    }
+    if (response.ok) {
+      setError(null)
+      setName('')
+      setPrice('')
+      setBrand('')
+      setimage('')
+      setDescription('')
+
+      console.log('new product added:', json)
+    }
+
+  }
+
   return (
     <>
       <link

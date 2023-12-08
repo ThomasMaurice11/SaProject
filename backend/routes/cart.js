@@ -4,7 +4,7 @@ const router = express.Router()
 const Cart=require('../models/cartModel')
 const {
     getProductsInCart: getProductsInCart,
-  getProductId: getProductId,
+  // getProduct: getProduct,
   addProducToCart: addProducToCart,
 //   deleteProduct: deleteProduct,
 //   updateProduct: updateProduct
@@ -23,10 +23,10 @@ const {
 
 
 // GET all products in cart
-router.get('/',getProductsInCart)
+router.get('/:userId',getProductsInCart)
 
 // GET a product id with specific user
-router.get('/',getProductId)
+// router.get('/',getProductId)
 
 // add product to cart
 router.post('/', addProducToCart)

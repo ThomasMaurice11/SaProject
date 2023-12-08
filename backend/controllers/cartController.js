@@ -1,42 +1,49 @@
 const Cart = require('../models/cartModel')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') ;
+
+
 
 
 // get all workouts
 const getProductsInCart = async (req, res) => {
-  const products = await Cart.find({}).sort({createdAt: -1})
+  const { userId } = req.params;
 
-  res.status(200).json(products)
-}
+  try {
+    const products = await Cart.find({ userId }).sort({ createdAt: -1 });
 
-const getProductId = async (req, res) => {
-  const { user_id } = req.params;
+    if (products.length === 0) {
+      return res.status(404).json({ error: 'No products found for the specified user_id' });
+    }
 
-  // Assuming user_id is not an ObjectId, you can use it directly in the query
-  const product = await Cart.findOne({ user_id });
-
-  if (!product) {
-    return res.status(404).json({ error: 'No such workout' });
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: `Internal Server Error: ${error.message}` });
   }
-
-  res.status(200).json(product);
 };
+
+
+// get a single workout
+
+
+
+
 
 
 
 // create a new workout
+// create a new workout
 const addProducToCart = async (req, res) => {
-  const {user_id,product_id,name,price,description,brand,image} = req.body
+  const {userId,product_id,name,price,description,brand,image} = req.body
 
   // add to the database
   try {
-    const product = await Cart.create({user_id,product_id,name,price,description,brand,image})
+    const product = await Cart.create({userId,product_id,name,price,description,brand,image})
     res.status(200).json(product)
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
 }
-
 // delete a workout
 // const deleteProduct = async (req, res) => {
 //     const { id } = req.params
@@ -75,7 +82,7 @@ const addProducToCart = async (req, res) => {
 
 module.exports = {
     getProductsInCart: getProductsInCart,
-  getProductId: getProductId,
+  // getProduct: getProduct,
   addProducToCart: addProducToCart,
 //   deleteProduct: deleteProduct,
 //   updateProduct: updateProduct
