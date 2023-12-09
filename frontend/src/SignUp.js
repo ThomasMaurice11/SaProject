@@ -15,32 +15,8 @@ const SignUp = () => {
     e.preventDefault();
     const data = { fname, mobile, address };
 
-    const response = await fetch('/api/user', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const json = await response.json();
-
-    if (!response.ok) {
-      // Handle error
-    }
-
-    if (response.ok) {
-      setFname('');
-      setMobile('');
-      setAddress('');
-
-      console.log('new product added:', json);
-
-      // After successful signup, navigate to /Login
-      
-    }
-
-    await signup(email, password);
+  
+    await signup(email, password,fname,mobile,address);
     history.push('/');
   };
     return ( 

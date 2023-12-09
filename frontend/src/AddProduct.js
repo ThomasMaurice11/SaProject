@@ -37,6 +37,7 @@ const AddProduct = () => {
       setDescription('')
 
       console.log('new product added:', json)
+      alert('product added');
     }
 
   }

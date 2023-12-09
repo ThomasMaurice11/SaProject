@@ -51,7 +51,7 @@ userSchema.statics.login = async function(email, password) {
   }
 
 
-userSchema.statics.signup = async function(email, password) {
+userSchema.statics.signup = async function(email, password,fname,mobile,address) {
     if (!email || !password) {
         throw Error('All fields must be filled')
       }
@@ -66,7 +66,7 @@ userSchema.statics.signup = async function(email, password) {
     }
  
   
-    const user = await this.create({ email, password })
+    const user = await this.create({ email, password,fname,mobile,address })
     
   
     return user

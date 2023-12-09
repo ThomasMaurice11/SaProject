@@ -1,5 +1,6 @@
-import React from 'react';
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useAuthContext } from "./hooks/useAuthContext"
+import { useUser } from './context/userContext';
 const Myprofile = () => {
   const [fname,setFname]=useState('');
   const [sname,setSname]=useState('');
@@ -7,34 +8,44 @@ const Myprofile = () => {
   const [address,setAddress]=useState('');
   const [error,setError]=useState('');
  
-  const handleSubmit = async (e) => {
-    e.preventDefault()
 
-    const data={fname,sname,mobile,address}
-    
-    const response = await fetch('/api/user', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
+
+  
+
+  // get products from cart
+  
+  const [data, setData] = useState({
+    name: '',
+    // Add other properties you expect in the user data
+  });
+  const { user } = useAuthContext();
+  const userId = useUser();
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await fetch(`/api/user/${userId}`, {
+          headers: { 'Authorization': `Bearer ${user.token}` },
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          setData(userData);
+        } else {
+          console.error('Failed to fetch user data:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
       }
-    })
-    const json = await response.json()
+    };
 
-    if (!response.ok) {
-      setError(json.error)
+    if (user) {
+      fetchProfileData();
     }
-    if (response.ok) {
-     
-      setFname('')
-      setSname('')
-      setMobile('')
-      setAddress('')
-      
+  }, [userId, user]);
 
-      console.log('new product added:', json)
-    }
-
+  if (!data) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -55,8 +66,8 @@ const Myprofile = () => {
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                 alt="Profile"
               />
-              <span className="font-weight-bold">Edogaru</span>
-              <span className="text-black-50">edogaru@mail.com.my</span>
+              <span className="font-weight-bold">{data.fname}</span>
+              <span className="text-black-50">{data.email}</span>
               <span> </span>
             </div>
           </div>
@@ -65,7 +76,9 @@ const Myprofile = () => {
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <h4 className="text-right">Profile Settings</h4>
               </div>
-              <form  onSubmit={handleSubmit}>
+              {/* <form  onSubmit={handleSubmit}> */}
+              
+              <form>
               <div className="row mt-2">
                 
                 <div className="col-md-6">
@@ -74,13 +87,14 @@ const Myprofile = () => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="first name"
-                    onChange={(e) => setFname(e.target.value)} 
-                    value={fname}
+                   
+                    
+                    value={data.fname}
                     defaultValue=""
+                    disabled
                   />
                 </div>
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                   <label className="labels">Surname</label>
                   <input
                     type="text"
@@ -90,7 +104,7 @@ const Myprofile = () => {
                     defaultValue=""
                     placeholder="surname"
                   />
-                </div>
+                </div> */}
               </div>
               <div className="row mt-3">
                 <div className="col-md-12">
@@ -99,9 +113,10 @@ const Myprofile = () => {
                     type="text"
                     className="form-control"
                     onChange={(e) => setMobile(e.target.value)} 
-                    value={mobile}
+                    value={data.mobile}
                     placeholder="enter phone number"
                     defaultValue=""
+                    disabled
                   />
                 </div>
                 <div className="col-md-12">
@@ -111,19 +126,20 @@ const Myprofile = () => {
                     className="form-control"
                     placeholder="enter address line 1"
                     onChange={(e) => setAddress(e.target.value)} 
-                    value={address}
+                    value={data.address}
                     defaultValue=""
+                    disabled
                   />
                 </div>
               </div>
 
-              <div className="mt-5 text-center">
+              {/* <div className="mt-5 text-center">
                 <button className="btn btn-primary profile-button" type="submit">
                   Save Profile
                 </button>
-              </div>
+              </div> */}
               </form>
-              
+           
               
             </div>
             

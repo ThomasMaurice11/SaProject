@@ -81,38 +81,32 @@ const Cart = () => {
       <div className="row">
         <div className="row main align-items-center">
           <div className="col-2">
-            <img className="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg" />
+            <img className="img-fluid" src="https://api.mobilaty.com/storage/uploads/QwyS5E-1614253558.jpg" />
           </div>
           <div className="col">
             <div className="row text-muted">{product.name}</div>
             <div className="row">{product.brand}</div>
           </div>
+          
           <div className="col">
-            <a href="#">-</a>
-            <a href="#" className="border">
-              1
-            </a>
-            <a href="#">+</a>
-          </div>
-          <div className="col">
-            {product.price}$ <span className="close">✕</span>
+            {product.price}$ 
           </div>
         </div>
       </div>
       ))}
   
-      <div className="back-to-shop">
+      {/* <div className="back-to-shop">
         <a href="#">←</a>
         <span className="text-muted">Back to shop</span>
       </div>
     </div>
-    <div className="col-md-4 summary">
+    <div className="col-md-4 summary"> */}
       
       
       <Link to ='/Payment'>
       <button className="btn-pay">Pay By Card</button>
       </Link>
-      <button className="btn-pay">CHECKOUT</button>
+      
     </div>
   </div>
 </div>

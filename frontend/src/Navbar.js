@@ -31,14 +31,14 @@ const Navbar = () => {
     <div>
       
       <ul id="navbar">
-        <li><a href="">{userId}</a></li>
+        <li><p>{userId}</p></li>
         <li>
           <Link to="/Home">
             Home
           </Link>
         </li>
         <li>
-          <Link to='/Myprofile'>My profile </Link>
+          <Link to={`/Myprofile/${userId}`}>My profile </Link>
         </li>
         <li>
           <Link to="/Products">products</Link>

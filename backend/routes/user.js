@@ -1,9 +1,12 @@
 const express = require('express')
+const router = express.Router()
+
+const user=require('../models/userModel')
 
 // controller functions
-const { loginUser, signupUser, completeReg } = require('../controllers/userController')
+const { loginUser, signupUser,getProfileData } = require('../controllers/userController')
 
-const router = express.Router()
+
 
 // login route
 router.post('/login', loginUser)
@@ -11,6 +14,7 @@ router.post('/login', loginUser)
 // signup route
 router.post('/signup', signupUser)
 //complete reg
-router.post('/', completeReg)
+router.get('/:userId', getProfileData)
+
 
 module.exports = router

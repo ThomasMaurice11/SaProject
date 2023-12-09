@@ -10,10 +10,16 @@ const Login = () => {
   const history = useHistory();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    await login(email, password);
-    history.push('/Home');
+    // Check if the user is an admin
+    if (email === 'admin@gmail.com' && password === 'admin') {
+      history.push('/addProduct');
+    } else {
+      // If not an admin, proceed with the normal login
+      await login(email, password);
+      history.push('/Home');
+    }
   }
     return ( 
       <>

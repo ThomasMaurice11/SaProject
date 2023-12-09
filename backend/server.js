@@ -3,6 +3,7 @@ const productRoutes = require('./routes/products');
 const cartRoutes = require('./routes/cart');
 const userRoutes = require('./routes/user');
 const savedRoutes = require('./routes/saved');
+// const profileRoutes = require('./routes/profile');
 const mongoose = require('mongoose');
 const path = require('path');
 require('dotenv').config();
@@ -29,6 +30,7 @@ app.use('/assets/ProductsDetails', express.static(path.join(__dirname, '../front
 app.use('/api/cart', cartRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/saved', savedRoutes);
+// app.use('/api/profile', profileRoutes);
 
 app.use('/api/products', productRoutes);
 
