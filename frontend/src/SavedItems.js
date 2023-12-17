@@ -66,7 +66,7 @@ const SavedItems = () => {
                     <div className="row d-flex justify-content-between align-items-center">
                       <div className="col-md-2 col-lg-2 col-xl-2">
                         <img
-                          src="assets/Home/macbook2.jpg"
+                          src={product.img}
                           className="img-fluid rounded-3"
                           alt="Cotton T-shirt"
                         />

@@ -1,13 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './Navbar';
+import Footer from './Footer';
 import Login from './Login';
 import SignUp from './SignUp';
 import Home from './Home';
-import { BrowserRouter as Router,Route,Switch } from 'react-router-dom/cjs/react-router-dom.min';
-import Navbar from './Navbar';
-import Footer from './Footer';
 import Myprofile from './Myprofile';
-import React from 'react';
 import Products from './Products';
 import ProductsDetails from './ProductsDetails';
 import Payment from './Payment';
@@ -15,72 +13,64 @@ import SavedItems from './SavedItems';
 import Checkout from './Checkout';
 import Cart from './Cart';
 import AddProduct from './AddProduct';
-// import MyId from './MyId';
-
+import { useAuthContext } from './hooks/useAuthContext'
 import { UserContextProvider } from './context/userContext';
 
-
-
-
 function App() {
+  const { user } = useAuthContext();
+
   return (
-   <UserContextProvider>
-    <Router>
-      <Navbar />
-      <Switch>
-      <Route exact path='/'>
-          <Login/>
-        </Route>
-        <Route path='/home'>
-           <Home />
-        </Route>
-        <Route path='/SignUp'>
-           <SignUp/> 
-        </Route>
-        <Route path='/Myprofile'>
-           <Myprofile/> 
-        </Route>
-        <Route path='/Products'>
-           <Products/> 
-           </Route>
-        <Route path='/ProductsDetails/:productId'>
-           <ProductsDetails/> 
-        </Route>
-    
-        <Route path='/Payment'>
-           <Payment/> 
-        </Route>
-        <Route path='/SavedItems'>
-           <SavedItems/> 
-        </Route>
-        <Route path='/Checkout'>
-           <Checkout/> 
-        </Route>
-        <Route path='/Cart/:userId'>
-           <Cart/> 
-        </Route>
-        <Route path='/addProduct'>
-           <AddProduct />
-        </Route>
-        
-        
-      </Switch>
-      <Footer />
-    </Router>
+   
+    <UserContextProvider>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path='/'>
+            {user ? <Home /> : <Login />}
+          </Route>
+          <Route exact path='/Login'>
+            {!user ? <Login /> : <Home/>}
+          </Route>
+          <Route exact path='/SignUp'>
+            {!user ? <SignUp /> : <Home/>}
+          </Route>
+          
+          
+          
+          <Route path='/home'>
+            <Home />
+          </Route>
+          <Route path='/SignUp'>
+            <SignUp />
+          </Route>
+          <Route path='/Myprofile'>
+            <Myprofile />
+          </Route>
+          <Route path='/Products'>
+            <Products />
+          </Route>
+          <Route path='/ProductsDetails/:productId'>
+            <ProductsDetails />
+          </Route>
+          <Route path='/Payment'>
+            <Payment />
+          </Route>
+          <Route path='/SavedItems'>
+            <SavedItems />
+          </Route>
+          <Route path='/Checkout'>
+            <Checkout />
+          </Route>
+          <Route path='/Cart/:userId'>
+            <Cart />
+          </Route>
+          <Route path='/addProduct'>
+            <AddProduct />
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
     </UserContextProvider>
-
-
-
-  
-
-
-  
-
-
-    
-
-    
-
   );
 }
 

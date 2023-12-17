@@ -112,7 +112,7 @@ const ProductsDetails = () => {
     if (response.ok) {
       // setError(null)
     
-      history.push(`/Cart`);
+      history.push(`/Cart/:id`);
 
 
       console.log('new product added:', json);

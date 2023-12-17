@@ -43,7 +43,7 @@ const Products = () => {
           {/* Map over the filtered products */}
           {filteredProducts.map((product) => (
             <div className="pro" key={product._id}>
-              <img src="assets/Home/macbook2.jpg" alt="" />
+              <img src={product.img} alt="" />
               <div className="des">
                 <span>{product.brand}</span>
                 <h5>{product.name}</h5>

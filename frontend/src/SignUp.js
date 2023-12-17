@@ -1,6 +1,8 @@
 import { useSignup } from "./hooks/useSignup"
+import { Link } from "react-router-dom/cjs/react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { useParams,useHistory } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext'
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [fname, setFname] = useState('');
@@ -9,15 +11,17 @@ const SignUp = () => {
   const [mobile, setMobile] = useState('');
 
   const { signup, error } = useSignup();
-  const history = useHistory(); // Add this line to use the useHistory hook
+  const history = useHistory(); 
+  const { user } = useAuthContext()// Add this line to use the useHistory hook
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = { fname, mobile, address };
+    // const data = { fname, mobile, address };
 
   
     await signup(email, password,fname,mobile,address);
-    history.push('/');
+   
+    
   };
     return ( 
         <>
@@ -126,9 +130,9 @@ const SignUp = () => {
             <figure>
               <img src="assets/reg/images/signup-image.jpg" alt="sing up image" />
             </figure>
-            <a href="#" className="signup-image-link">
+            <Link to='/' className="signup-image-link">
               I am already member
-            </a>
+            </Link>
           </div>
         </div>
       </div>

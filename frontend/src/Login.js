@@ -2,25 +2,35 @@ import { useState } from "react"
 import { useLogin } from "./hooks/useLogin"
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import { useParams,useHistory } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const {login, error, isLoading} = useLogin()
   const history = useHistory();
+  const { user } = useAuthContext()
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Check if the user is an admin
-    if (email === 'admin@gmail.com' && password === 'admin') {
-      history.push('/addProduct');
-    } else {
-      // If not an admin, proceed with the normal login
-      await login(email, password);
-      history.push('/Home');
+  
+  
+    try {
+      if (email === 'admin@gmail.com' && password === 'admin') {
+        history.push('/addProduct');
+      } else {
+      
+      await login(email, password)
+       
+       
+      }
+    } catch (error) {
+      console.error('Login error:', error.message);
+      // Handle the error appropriately, e.g., display an error message to the user
     }
-  }
+  };
+  
     return ( 
       <>
         <meta charSet="UTF-8" />

@@ -81,7 +81,7 @@ const Cart = () => {
       <div className="row">
         <div className="row main align-items-center">
           <div className="col-2">
-            <img className="img-fluid" src="https://api.mobilaty.com/storage/uploads/QwyS5E-1614253558.jpg" />
+            <img className="img-fluid" src={product.img}/>
           </div>
           <div className="col">
             <div className="row text-muted">{product.name}</div>

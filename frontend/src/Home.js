@@ -57,7 +57,7 @@ const Home = () => {
       <h6>Save Money</h6>
     </div>
     <div className="fe-box">
-      <img src="assets/Home/f4.png" alt="" />
+    <img src="assets/Home/f4.png" alt="" />
       <h6>Promotions</h6>
     </div>
     <div className="fe-box">
@@ -74,7 +74,7 @@ const Home = () => {
       <div className="pro">
 
 
-<img src="assets/Home/macbook2.jpg" alt="" />
+<img src={product.img}  alt="" />
 <div className="des">
   <span>{product.brand}</span>
   <h5 key={product._id}>{product.name}</h5>
@@ -109,7 +109,7 @@ const Home = () => {
       <div className="pro">
 
 
-<img src="assets/Home/macbook2.jpg" alt="" />
+<img src={product.img} alt="" />
 <div className="des">
   <span>{product.brand}</span>
   <h5 key={product._id}>{product.name}</h5>
