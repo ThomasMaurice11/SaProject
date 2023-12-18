@@ -61,7 +61,7 @@ function App() {
           <Route path='/Checkout'>
             <Checkout />
           </Route>
-          <Route path='/Cart/:userId'>
+          <Route path='/Cart'>
             <Cart />
           </Route>
           <Route path='/addProduct'>

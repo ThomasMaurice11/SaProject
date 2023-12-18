@@ -74,7 +74,7 @@ const Home = () => {
       <div className="pro">
 
 
-<img src={product.img}  alt="" />
+<img src={product.image}  alt="" />
 <div className="des">
   <span>{product.brand}</span>
   <h5 key={product._id}>{product.name}</h5>
@@ -109,7 +109,7 @@ const Home = () => {
       <div className="pro">
 
 
-<img src={product.img} alt="" />
+<img src={product.image}alt="" />
 <div className="des">
   <span>{product.brand}</span>
   <h5 key={product._id}>{product.name}</h5>

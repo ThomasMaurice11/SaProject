@@ -112,7 +112,7 @@ const ProductsDetails = () => {
     if (response.ok) {
       // setError(null)
     
-      history.push(`/Cart/:id`);
+      history.push(`/Cart`);
 
 
       console.log('new product added:', json);
@@ -163,7 +163,7 @@ const ProductsDetails = () => {
     return (  
         <>
 
-  <link rel="stylesheet" href="assets/ProductsDetails/style.css" />
+ 
 
   <link
         rel="stylesheet"
@@ -173,6 +173,7 @@ const ProductsDetails = () => {
     href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
     rel="stylesheet"
   />
+  <div className='allInProductDetails'>
   <div className="container">
     
  
@@ -219,21 +220,22 @@ const ProductsDetails = () => {
         </div> */}
         <h4 className="title">Qty</h4>
         <input type="text" defaultValue={1} className="qty" />
-        <Link to={`/Cart/${userId}`}>
+        
   <button onClick={addToCart} className="addtocart">
     add to Cart
   </button>
-</Link>
-<Link to={`/Cart/${userId}`}>
+
+
   <button onClick={addToSaved} className="addtocart">
     Save Item
   </button>
-</Link>
+
         {/* <a href="" className="cart">
           Add to cart
         </a> */}
       </div>
     </div>
+  </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" />

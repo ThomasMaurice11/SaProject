@@ -66,25 +66,23 @@ const SavedItems = () => {
                     <div className="row d-flex justify-content-between align-items-center">
                       <div className="col-md-2 col-lg-2 col-xl-2">
                         <img
-                          src={product.img}
-                          className="img-fluid rounded-3"
+                          src={product.image}
+                          className="img-fluid rounded-1"
                           alt="Cotton T-shirt"
                         />
                       </div>
                       <div className="col-md-3 col-lg-3 col-xl-3">
-                        <p className="lead fw-normal mb-2">{product.name}</p>
+                        <p className="lead fw-normal mb-2"> name :{product.name}</p>
                         <p>
-                          <span className="text-muted">{product.price}$</span>
+                          <span className="text-muted">price :{product.price}$</span>
                          </p>
                       </div>
                       
-                      <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                      {/* <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                         <h5 className="mb-0">{product.price}</h5>
-                      </div>
+                      </div> */}
                       <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                        <a href="#!" className="text-danger">
-                          <i className="fas fa-trash fa-lg" />
-                        </a>
+                      
                       </div>
                     </div>
                   </div>

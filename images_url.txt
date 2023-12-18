@@ -1,2 +1,16 @@
 1- https://api.mobilaty.com/storage/uploads/QwyS5E-1614253558.jpg
-2-
+
+
+local
+1-assets/Home/macbook2.jpg
+2-assets/Home/lenovo1.jpg
+3-assets/Home/lab.jpg
+4-assets/Home/asus1.jpg
+5-assets/Home/hp1.jpg
+6-
+
+
+
+
+2-assets/Home/macbook.jpg    
+3-assets/Home/macbook3.jpg
