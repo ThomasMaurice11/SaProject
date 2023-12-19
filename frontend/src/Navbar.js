@@ -48,7 +48,7 @@ const Navbar = () => {
           <Link to="/SavedItems">Saved Items</Link>
         </li>
         <li>
-        <Link to={`/cart/${userId}`}>Cart</Link>
+        <Link to={`/cart`}>Cart</Link>
 
         </li>
         <li>

@@ -62,7 +62,7 @@ const Cart = () => {
   />
 </>
 
-      <link rel='stylesheet' href='assets/Cart/style.cs'></link>
+      <link rel='stylesheet' href='assets/Cart/style.css'></link>
       <div className="allCart">
 <div className="card">
   <div className="row">
@@ -81,7 +81,7 @@ const Cart = () => {
       <div className="row">
         <div className="row main align-items-center">
           <div className="col-2">
-            <img className="img-fluid" src={product.img}/>
+            <img className="img-fluid" src={product.image} alt="" />
           </div>
           <div className="col">
             <div className="row text-muted">{product.name}</div>

@@ -9,7 +9,7 @@
   
   .container {
     background-color: #fff;
-    padding: 20px;
+    padding: 50px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -21,11 +21,12 @@
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
+    
   }
   
-  .card:hover {
+  /* .card:hover {
     transform: scale(1.02);
-  }
+  } */
   
   .card-body {
     padding: 20px;
@@ -33,7 +34,7 @@
   
   /* Styles for the image */
   .card img {
-    max-width: 100%;
+    max-width: 30%;
     height: auto;
     border-radius: 5px;
   }
