@@ -45,7 +45,7 @@ const Products = () => {
             <div className="pro" key={product._id}>
               <img src={product.image} alt="" />
               <div className="des">
-                <span>{product.brand}</span>
+                <span className="final">{product.brand}</span>
                 <h5>{product.name}</h5>
                 <div className="star">
                   <i className="fas fa-star" />

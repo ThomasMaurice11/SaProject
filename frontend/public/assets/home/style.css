@@ -297,6 +297,9 @@
       outline: none;
       transition: 0.2s;
   }
+  .des{
+    padding-top:10 px;
+  }
   
   #sm-banner banner-box:hover button{
       background-color: #089177;

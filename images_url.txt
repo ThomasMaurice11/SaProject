@@ -1,4 +1,6 @@
 1- https://api.mobilaty.com/storage/uploads/QwyS5E-1614253558.jpg
+2-https://m.media-amazon.com/images/I/51GRKcKfjVL._AC_UL320_.jpg
+3-https://m.media-amazon.com/images/I/512rfPA6vgL._AC_UL320_.jpg
 
 
 local
